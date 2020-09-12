@@ -1,0 +1,9 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "go-sam-sanity"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-i3wai8ebw69i"
+s3_prefix = "go-sam-sanity"
+region = "ap-southeast-1"
+capabilities = "CAPABILITY_IAM"
