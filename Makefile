@@ -14,4 +14,5 @@ validate:
 	aws cloudformation validate-template --template-body file://template.yaml
 
 destroy:
+	# TODO match with samconfig.toml
 	AWS_PROFILE=mine aws cloudformation delete-stack --stack-name go-sam-sanity

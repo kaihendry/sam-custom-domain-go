@@ -26,7 +26,7 @@ Resources:
             HostedZoneId: !Ref HostedZoneId
 
   HelloWorldFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: hello-world/
       Handler: hello-world
@@ -44,6 +44,19 @@ Resources:
             RestApiId: !Ref MyApi
             Path: /{proxy+}
             Method: ANY
+      Policies:
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt SendSnsTopic.TopicName
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref SendSnsTopic
+
+  SendSnsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: kai.hendry+snstest@gmail.com
+          Protocol: email
 
 Outputs:
   HelloWorldFunction:
