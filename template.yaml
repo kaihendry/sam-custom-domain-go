@@ -2,15 +2,11 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
   go-sam-sanity
-  
-  Sample SAM Template for go-sam-sanity
 
 Parameters:
   DomainName:
     Type: String
   ACMCertificateArn:
-    Type: String
-  HostedZoneId:
     Type: String
 
 Resources:
@@ -22,8 +18,6 @@ Resources:
           DomainName: !Ref DomainName
           CertificateArn: !Ref ACMCertificateArn
           EndpointConfiguration: EDGE
-          Route53:
-            HostedZoneId: !Ref HostedZoneId
 
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -52,3 +46,6 @@ Outputs:
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
+  HelloWorldCFDomain:
+    Description: "https://s.natalian.org/2020-12-09/outputs-domain-name-how.png"
+    Value: !GetAtt ApiGatewayDomainName7a4a41c73c.DistributionDomainName
